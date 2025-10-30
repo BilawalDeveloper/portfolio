@@ -98,4 +98,4 @@ CHAT_RATE_LIMIT=60
 4. Vector search for better context retrieval
 5. Analytics dashboard
 
-See full specification for implementation details and timeline.
+Implementation details for these features will be added as they are developed in future phases.
