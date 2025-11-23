@@ -57,6 +57,19 @@ Highlights in-demand skills including:
 
 ## 🚀 Getting Started
 
+### Configuration
+
+Before deploying, update the following configuration values:
+
+1. **Form Submission (script.js)**
+   - Set `CONFIG.formspreeEndpoint` to your Formspree form ID (get one free at https://formspree.io)
+   - Set `CONFIG.contactEmail` to your actual contact email
+
+2. **Social Media Image**
+   - Create `og-image.png` (1200x630px recommended) for social media sharing
+   - Place it in the root directory
+   - Update meta tags in `index.html` if using a different filename
+
 ### Local Development
 
 1. Clone the repository:

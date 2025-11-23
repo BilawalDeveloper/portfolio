@@ -1,3 +1,12 @@
+// ===== CONFIGURATION =====
+// Update these values with your actual information
+const CONFIG = {
+    // Form submission endpoint - Get your form ID from https://formspree.io
+    formspreeEndpoint: 'YOUR_FORM_ID', // Replace with your actual Formspree form ID
+    // Contact email
+    contactEmail: 'contact@aidev.com', // Replace with your actual email
+};
+
 // ===== PARTICLE SYSTEM =====
 class ParticleSystem {
     constructor(canvas) {
@@ -543,10 +552,9 @@ function initFormSubmission() {
             
             try {
                 // Use Formspree for form submission (free service for static sites)
-                // To enable: Create an account at https://formspree.io and get your form endpoint
-                // Replace 'YOUR_FORM_ID' with your actual Formspree form ID
+                // Update CONFIG.formspreeEndpoint at the top of this file with your Formspree form ID
                 
-                const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+                const FORMSPREE_ENDPOINT = `https://formspree.io/f/${CONFIG.formspreeEndpoint}`;
                 
                 // Prepare form data
                 const formData = new FormData();
@@ -554,9 +562,8 @@ function initFormSubmission() {
                 formData.append('email', emailInput.value.trim());
                 formData.append('message', messageInput.value.trim());
                 
-                // Alternative: Use fetch with Web3Forms or similar service
-                // For demo purposes, we'll use mailto as fallback
-                const isFormspreeConfigured = !FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
+                // Check if Formspree is configured
+                const isFormspreeConfigured = CONFIG.formspreeEndpoint !== 'YOUR_FORM_ID';
                 
                 if (isFormspreeConfigured) {
                     // Send to Formspree
@@ -592,7 +599,7 @@ function initFormSubmission() {
                     showFormMessage('Opening your email client to send the message...', 'success');
                     
                     // Open mailto link
-                    window.location.href = `mailto:contact@aidev.com?subject=${subject}&body=${body}`;
+                    window.location.href = `mailto:${CONFIG.contactEmail}?subject=${subject}&body=${body}`;
                     
                     // Clear form after a delay
                     setTimeout(() => {
@@ -606,7 +613,7 @@ function initFormSubmission() {
                 
             } catch (error) {
                 console.error('Form submission error:', error);
-                showFormMessage('✗ Failed to send message. Please try again later or email us directly at contact@aidev.com', 'error');
+                showFormMessage(`✗ Failed to send message. Please try again later or email us directly at ${CONFIG.contactEmail}`, 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
