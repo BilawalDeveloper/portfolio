@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Fullstack Developer & AI Engineer - Expert in LLMs, RAG, Vector Databases, and Modern AI Technologies">
-    <title>AI Fullstack Developer Portfolio</title>
+    <meta name="keywords" content="AI Engineer, Fullstack Developer, LLMs, RAG, Vector Databases, Machine Learning, React, Python, Node.js">
+    <meta name="author" content="AI.DEV">
+    <title>AI Fullstack Developer Portfolio | Expert in LLMs & Modern AI</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI Fullstack Developer Portfolio">
+    <meta property="og:description" content="Building intelligent systems with LLMs, RAG, Vector Databases, and cutting-edge AI Technologies">
+    <meta property="og:url" content="https://bilawaldeveloper.github.io/portfolio/">
+    <meta property="og:site_name" content="AI.DEV Portfolio">
+    <meta property="og:image" content="https://bilawaldeveloper.github.io/portfolio/og-image.png">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Fullstack Developer Portfolio">
+    <meta name="twitter:description" content="Building intelligent systems with LLMs, RAG, Vector Databases, and cutting-edge AI Technologies">
+    <meta name="twitter:image" content="https://bilawaldeveloper.github.io/portfolio/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z' stroke='%2300d4ff' stroke-width='2' fill='none'/><circle cx='20' cy='20' r='3' fill='%2300d4ff'/></svg>">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0e27">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,12 +67,30 @@
                 </svg>
                 <span class="logo-text">AI.DEV</span>
             </div>
-            <ul class="nav-links">
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="theme-icon sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1v6M12 17v6M23 12h-6M7 12H1M20.66 20.66l-4.24-4.24M7.58 7.58L3.34 3.34M20.66 3.34l-4.24 4.24M7.58 16.42l-4.24 4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="navLinks" role="navigation">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
             </ul>
         </div>
     </nav>
@@ -76,6 +118,13 @@
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
+                    </a>
+                    <a href="resume.html" class="btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M6 2L14 2C14.5523 2 15 2.44772 15 3V17C15 17.5523 14.5523 18 14 18H6C5.44772 18 5 17.5523 5 17V3C5 2.44772 5.44772 2 6 2Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M8 6H12M8 9H12M8 12H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Download Resume</span>
                     </a>
                     <a href="#contact" class="btn-secondary">
                         <span>Get In Touch</span>
@@ -628,17 +677,26 @@
                     </div>
                 </div>
                 
-                <form class="contact-form">
+                <form class="contact-form" id="contactForm">
+                    <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" class="form-input" required>
+                        <label for="contactName" class="sr-only">Your Name</label>
+                        <input type="text" id="contactName" name="name" placeholder="Your Name" class="form-input" required aria-required="true">
+                        <span class="form-error" id="nameError"></span>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" class="form-input" required>
+                        <label for="contactEmail" class="sr-only">Your Email</label>
+                        <input type="email" id="contactEmail" name="email" placeholder="Your Email" class="form-input" required aria-required="true">
+                        <span class="form-error" id="emailError"></span>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Your Message" class="form-input form-textarea" rows="5" required></textarea>
+                        <label for="contactMessage" class="sr-only">Your Message</label>
+                        <textarea id="contactMessage" name="message" placeholder="Your Message" class="form-input form-textarea" rows="5" required aria-required="true"></textarea>
+                        <span class="form-error" id="messageError"></span>
                     </div>
-                    <button type="submit" class="btn-primary">
+                    <!-- Honeypot field for spam prevention -->
+                    <input type="text" name="website" style="display: none;" tabindex="-1" autocomplete="off">
+                    <button type="submit" class="btn-primary" id="submitBtn">
                         <span>Send Message</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -677,10 +735,10 @@
                     <div class="footer-column">
                         <h4>Connect</h4>
                         <ul>
-                            <li><a href="#">GitHub</a></li>
-                            <li><a href="#">LinkedIn</a></li>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Medium</a></li>
+                            <li><a href="https://github.com/BilawalDeveloper" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="https://linkedin.com/in/bilawaldeveloper" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://twitter.com/bilawaldeveloper" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li><a href="https://medium.com/@bilawaldeveloper" target="_blank" rel="noopener noreferrer">Medium</a></li>
                         </ul>
                     </div>
                 </div>
@@ -690,6 +748,28 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" id="cookieConsent" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc">
+        <div class="cookie-content">
+            <h3 id="cookieTitle">Cookie Consent</h3>
+            <p id="cookieDesc">We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you consent to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button class="btn-secondary cookie-btn" id="cookieAccept">Accept</button>
+                <button class="btn-secondary cookie-btn" id="cookieDecline">Decline</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
