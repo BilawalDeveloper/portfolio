@@ -399,14 +399,22 @@ function initCustomCursor() {
 function animateSkillBars() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            const progressBars = entry.target.querySelectorAll('.skill-progress');
+            
             if (entry.isIntersecting) {
-                const progressBars = entry.target.querySelectorAll('.skill-progress');
+                // Animate when entering viewport
                 progressBars.forEach((bar, index) => {
                     setTimeout(() => {
                         bar.style.animation = 'growBar 1.5s ease-out forwards';
                     }, index * 100);
                 });
-                observer.unobserve(entry.target);
+            } else {
+                // Reset animation when leaving viewport so it can replay
+                progressBars.forEach(bar => {
+                    bar.style.animation = 'none';
+                    // Trigger reflow to restart animation
+                    void bar.offsetWidth;
+                });
             }
         });
     }, {
