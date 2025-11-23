@@ -534,29 +534,71 @@ function initFormSubmission() {
             submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Sending...</span>';
             
             try {
-                // Simulate API call (replace with actual backend endpoint)
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Use Formspree for form submission (free service for static sites)
+                // To enable: Create an account at https://formspree.io and get your form endpoint
+                // Replace 'YOUR_FORM_ID' with your actual Formspree form ID
                 
-                // For demo purposes - in production, send to your backend
-                const formData = {
-                    name: nameInput.value.trim(),
-                    email: emailInput.value.trim(),
-                    message: messageInput.value.trim()
-                };
+                const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
                 
-                console.log('Form data:', formData);
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('name', nameInput.value.trim());
+                formData.append('email', emailInput.value.trim());
+                formData.append('message', messageInput.value.trim());
                 
-                // Success
-                showFormMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
-                form.reset();
+                // Alternative: Use fetch with Web3Forms or similar service
+                // For demo purposes, we'll use mailto as fallback
+                const isFormspreeConfigured = !FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
                 
-                // Clear validation states
-                [nameInput, emailInput, messageInput].forEach(input => {
-                    input.classList.remove('valid', 'invalid');
-                });
+                if (isFormspreeConfigured) {
+                    // Send to Formspree
+                    const response = await fetch(FORMSPREE_ENDPOINT, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        showFormMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
+                        form.reset();
+                        
+                        // Clear validation states
+                        [nameInput, emailInput, messageInput].forEach(input => {
+                            input.classList.remove('valid', 'invalid');
+                        });
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } else {
+                    // Fallback to mailto (opens email client)
+                    const subject = encodeURIComponent('Portfolio Contact Form Submission');
+                    const body = encodeURIComponent(
+                        `Name: ${nameInput.value.trim()}\n` +
+                        `Email: ${emailInput.value.trim()}\n\n` +
+                        `Message:\n${messageInput.value.trim()}`
+                    );
+                    
+                    // Show message that email client will open
+                    showFormMessage('Opening your email client to send the message...', 'success');
+                    
+                    // Open mailto link
+                    window.location.href = `mailto:contact@aidev.com?subject=${subject}&body=${body}`;
+                    
+                    // Clear form after a delay
+                    setTimeout(() => {
+                        form.reset();
+                        [nameInput, emailInput, messageInput].forEach(input => {
+                            input.classList.remove('valid', 'invalid');
+                        });
+                        showFormMessage('Please send the email from your email client.', 'success');
+                    }, 1000);
+                }
                 
             } catch (error) {
-                showFormMessage('✗ Failed to send message. Please try again later.', 'error');
+                console.error('Form submission error:', error);
+                showFormMessage('✗ Failed to send message. Please try again later or email us directly at contact@aidev.com', 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
