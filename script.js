@@ -1,10 +1,10 @@
 // ===== CONFIGURATION =====
-// Update these values with your actual information
+// ⚠️ IMPORTANT: Update these values before deploying to production
 const CONFIG = {
     // Form submission endpoint - Get your form ID from https://formspree.io
-    formspreeEndpoint: 'YOUR_FORM_ID', // Replace with your actual Formspree form ID
+    formspreeEndpoint: 'YOUR_FORM_ID', // TODO: Replace with actual Formspree form ID before deployment
     // Contact email
-    contactEmail: 'contact@aidev.com', // Replace with your actual email
+    contactEmail: 'contact@aidev.com', // TODO: Replace with actual email before deployment
 };
 
 // ===== PARTICLE SYSTEM =====
@@ -411,18 +411,20 @@ function animateSkillBars() {
             const progressBars = entry.target.querySelectorAll('.skill-progress');
             
             if (entry.isIntersecting) {
-                // Animate when entering viewport
-                progressBars.forEach((bar, index) => {
-                    setTimeout(() => {
-                        bar.style.animation = 'growBar 1.5s ease-out forwards';
-                    }, index * 100);
+                // Animate when entering viewport using RAF to batch reflows
+                requestAnimationFrame(() => {
+                    progressBars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.animation = 'growBar 1.5s ease-out forwards';
+                        }, index * 100);
+                    });
                 });
             } else {
-                // Reset animation when leaving viewport so it can replay
-                progressBars.forEach(bar => {
-                    bar.style.animation = 'none';
-                    // Trigger reflow to restart animation
-                    void bar.offsetWidth;
+                // Reset animation when leaving viewport
+                requestAnimationFrame(() => {
+                    progressBars.forEach(bar => {
+                        bar.style.animation = 'none';
+                    });
                 });
             }
         });
@@ -598,8 +600,10 @@ function initFormSubmission() {
                     // Show message that email client will open
                     showFormMessage('Opening your email client to send the message...', 'success');
                     
-                    // Open mailto link
-                    window.location.href = `mailto:${CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+                    // Open mailto link using anchor element to avoid navigation side effects
+                    const mailtoLink = document.createElement('a');
+                    mailtoLink.href = `mailto:${CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+                    mailtoLink.click();
                     
                     // Clear form after a delay
                     setTimeout(() => {
