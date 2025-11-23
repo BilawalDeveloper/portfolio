@@ -19,7 +19,7 @@
         <category>LangChain</category>
         <category>AI</category>
         <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
-        <guid>https://bilawaldeveloper.github.io/portfolio/blog.html#rag-systems-2025</guid>
+        <guid isPermaLink="false">rag-systems-2025</guid>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
         <category>LLMs</category>
         <category>GPT-4</category>
         <pubDate>Mon, 13 Jan 2025 00:00:00 +0000</pubDate>
-        <guid>https://bilawaldeveloper.github.io/portfolio/blog.html#prompt-engineering</guid>
+        <guid isPermaLink="false">prompt-engineering</guid>
     </item>
     
     <item>
@@ -43,7 +43,7 @@
         <category>Embeddings</category>
         <category>AI</category>
         <pubDate>Mon, 6 Jan 2025 00:00:00 +0000</pubDate>
-        <guid>https://bilawaldeveloper.github.io/portfolio/blog.html#vector-databases</guid>
+        <guid isPermaLink="false">vector-databases</guid>
     </item>
     
     <item>
@@ -55,7 +55,7 @@
         <category>LangGraph</category>
         <category>Claude</category>
         <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
-        <guid>https://bilawaldeveloper.github.io/portfolio/blog.html#ai-agents-langGraph</guid>
+        <guid isPermaLink="false">ai-agents-langgraph</guid>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
         <category>LLMs</category>
         <category>Machine Learning</category>
         <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-        <guid>https://bilawaldeveloper.github.io/portfolio/blog.html#fine-tuning-llms</guid>
+        <guid isPermaLink="false">fine-tuning-llms</guid>
     </item>
     
     <item>
@@ -79,7 +79,7 @@
         <category>Embeddings</category>
         <category>NLP</category>
         <pubDate>Mon, 16 Dec 2024 00:00:00 +0000</pubDate>
-        <guid>https://bilawaldeveloper.github.io/portfolio/blog.html#semantic-search</guid>
+        <guid isPermaLink="false">semantic-search</guid>
     </item>
 
 </channel>

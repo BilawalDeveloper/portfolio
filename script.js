@@ -862,7 +862,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         text: text,
                         url: url
                     });
-                    console.log('Successfully shared');
                 } catch (error) {
                     // User cancelled or error occurred
                     if (error.name !== 'AbortError') {
