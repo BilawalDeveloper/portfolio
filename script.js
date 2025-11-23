@@ -431,32 +431,111 @@ function initTypingEffect() {
     setTimeout(type, 1000);
 }
 
-// ===== FORM SUBMISSION =====
+// ===== FORM VALIDATION & SUBMISSION =====
 function initFormSubmission() {
-    const form = document.querySelector('.contact-form');
+    const form = document.getElementById('contactForm');
     if (!form) return;
     
-    form.addEventListener('submit', (e) => {
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const messageInput = document.getElementById('contactMessage');
+    const honeypot = form.querySelector('input[name="website"]');
+    const formMessage = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    // Real-time validation
+    nameInput.addEventListener('blur', () => validateField(nameInput, 'nameError', nameInput.value.trim().length >= 2, 'Name must be at least 2 characters'));
+    emailInput.addEventListener('blur', () => validateField(emailInput, 'emailError', emailRegex.test(emailInput.value.trim()), 'Please enter a valid email'));
+    messageInput.addEventListener('blur', () => validateField(messageInput, 'messageError', messageInput.value.trim().length >= 10, 'Message must be at least 10 characters'));
+    
+    function validateField(field, errorId, isValid, errorMessage) {
+        const errorElement = document.getElementById(errorId);
+        if (!isValid) {
+            field.classList.add('invalid');
+            field.classList.remove('valid');
+            errorElement.textContent = errorMessage;
+            return false;
+        } else {
+            field.classList.add('valid');
+            field.classList.remove('invalid');
+            errorElement.textContent = '';
+            return true;
+        }
+    }
+    
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Simulate form submission
-        const button = form.querySelector('.btn-primary');
-        const originalText = button.innerHTML;
-        button.innerHTML = '<span>Sending...</span>';
-        button.style.opacity = '0.6';
-        
-        setTimeout(() => {
-            button.innerHTML = '<span>Message Sent! ✓</span>';
-            button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        try {
+            // Check honeypot (spam prevention)
+            if (honeypot.value) {
+                return; // Bot detected, silently fail
+            }
             
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.style.opacity = '1';
-                button.style.background = '';
+            // Validate all fields
+            const isNameValid = validateField(nameInput, 'nameError', nameInput.value.trim().length >= 2, 'Name must be at least 2 characters');
+            const isEmailValid = validateField(emailInput, 'emailError', emailRegex.test(emailInput.value.trim()), 'Please enter a valid email');
+            const isMessageValid = validateField(messageInput, 'messageError', messageInput.value.trim().length >= 10, 'Message must be at least 10 characters');
+            
+            if (!isNameValid || !isEmailValid || !isMessageValid) {
+                showFormMessage('Please fix the errors above', 'error');
+                return;
+            }
+            
+            // Disable submit button and show loading
+            submitBtn.disabled = true;
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Sending...</span>';
+            
+            try {
+                // Simulate API call (replace with actual backend endpoint)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // For demo purposes - in production, send to your backend
+                const formData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    message: messageInput.value.trim()
+                };
+                
+                console.log('Form data:', formData);
+                
+                // Success
+                showFormMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
                 form.reset();
-            }, 3000);
-        }, 2000);
+                
+                // Clear validation states
+                [nameInput, emailInput, messageInput].forEach(input => {
+                    input.classList.remove('valid', 'invalid');
+                });
+                
+            } catch (error) {
+                showFormMessage('✗ Failed to send message. Please try again later.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showFormMessage('✗ An unexpected error occurred. Please try again.', 'error');
+            submitBtn.disabled = false;
+        }
     });
+    
+    function showFormMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type}`;
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        if (type === 'success') {
+            setTimeout(() => {
+                formMessage.className = 'form-message';
+            }, 5000);
+        }
+    }
 }
 
 // ===== PARALLAX EFFECT =====
@@ -517,6 +596,142 @@ function initNavigationActiveState() {
     });
 }
 
+// ===== MOBILE MENU TOGGLE =====
+function initMobileMenu() {
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (!menuToggle || !navLinks) return;
+    
+    menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+        navLinks.classList.toggle('active');
+        
+        // Focus management
+        if (!isExpanded) {
+            // Menu opening - focus first link
+            const firstLink = navLinks.querySelector('.nav-link');
+            if (firstLink) {
+                setTimeout(() => firstLink.focus(), 100);
+            }
+        }
+    });
+    
+    // Close menu when clicking on a link
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navLinks.classList.remove('active');
+            menuToggle.focus();
+        });
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navLinks.classList.remove('active');
+            menuToggle.focus();
+        }
+    });
+}
+
+// ===== THEME TOGGLE =====
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+    
+    // Check for saved theme preference or default to 'dark'
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-theme');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+        localStorage.setItem('theme', theme);
+    });
+}
+
+// ===== BACK TO TOP BUTTON =====
+function initBackToTop() {
+    const backToTop = document.getElementById('backToTop');
+    if (!backToTop) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Keyboard support
+    backToTop.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
+}
+
+// ===== SCROLL PROGRESS INDICATOR =====
+function initScrollProgress() {
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (!scrollProgress) return;
+    
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.pageYOffset / windowHeight) * 100;
+        scrollProgress.style.width = scrolled + '%';
+        scrollProgress.setAttribute('aria-valuenow', Math.round(scrolled));
+    });
+}
+
+// ===== COOKIE CONSENT =====
+function initCookieConsent() {
+    const cookieConsent = document.getElementById('cookieConsent');
+    const acceptBtn = document.getElementById('cookieAccept');
+    const declineBtn = document.getElementById('cookieDecline');
+    
+    if (!cookieConsent) return;
+    
+    // Check if user has already made a choice
+    const cookieChoice = localStorage.getItem('cookieConsent');
+    
+    if (!cookieChoice) {
+        // Show banner after 2 seconds
+        setTimeout(() => {
+            cookieConsent.classList.add('show');
+        }, 2000);
+    }
+    
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        cookieConsent.classList.remove('show');
+        // Initialize analytics here if needed
+        console.log('Cookies accepted');
+    });
+    
+    declineBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'declined');
+        cookieConsent.classList.remove('show');
+        console.log('Cookies declined');
+    });
+}
+
 // ===== INITIALIZE EVERYTHING =====
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize particle system
@@ -555,6 +770,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initFormSubmission();
     initParallaxEffect();
     initNavigationActiveState();
+    initMobileMenu();
+    initThemeToggle();
+    initBackToTop();
+    initScrollProgress();
+    initCookieConsent();
     
     // Add active class to nav links on scroll
     const navStyle = document.createElement('style');

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise RAG System - AI.DEV Project</title>
+    <meta name="description" content="Production-ready RAG system using LangChain, Pinecone, and GPT-4 processing 10M+ documents">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-detail {
+            padding: calc(80px + 2rem) 1.5rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .project-header {
+            margin-bottom: 3rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .project-title-large {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+        .meta-item strong {
+            color: var(--text-primary);
+        }
+        .project-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .tech-badge {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            font-weight: 500;
+            color: var(--accent-cyan);
+        }
+        .feature-list, .challenge-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li, .challenge-list li {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .challenge-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .metric-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .metric-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="neural-background">
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                    <svg width="40" height="40" viewBox="0 0 40 40">
+                        <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" stroke="url(#grad)" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="20" r="3" fill="url(#grad)"/>
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff" />
+                                <stop offset="100%" style="stop-color:#7b2ff7" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">AI.DEV</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="project-detail">
+        <div class="project-header">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>›</span>
+                <a href="../index.html#projects">Projects</a>
+                <span>›</span>
+                <span>Enterprise RAG System</span>
+            </nav>
+            
+            <h1 class="project-title-large">Enterprise RAG System</h1>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <strong>Role:</strong> Lead AI Engineer
+                </div>
+                <div class="meta-item">
+                    <strong>Duration:</strong> 6 months
+                </div>
+                <div class="meta-item">
+                    <strong>Team Size:</strong> 5 developers
+                </div>
+                <div class="meta-item">
+                    <strong>Year:</strong> 2024
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="https://github.com/BilawalDeveloper" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.137 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z" fill="currentColor"/>
+                    </svg>
+                    <span>View on GitHub</span>
+                </a>
+                <a href="../index.html#contact" class="btn-secondary">
+                    <span>Discuss This Project</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Project Overview</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                Built a production-ready Retrieval-Augmented Generation (RAG) system for a Fortune 500 enterprise, 
+                enabling intelligent document search and question-answering across 10+ million documents. The system 
+                processes legal contracts, technical documentation, and internal knowledge bases with 95% accuracy 
+                in information retrieval.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.8;">
+                The solution integrates cutting-edge AI technologies including LangChain for orchestration, Pinecone 
+                for vector storage, and GPT-4 for generation, deployed on AWS with auto-scaling capabilities to handle 
+                variable loads efficiently.
+            </p>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Key Metrics & Results</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">10M+</div>
+                    <div class="metric-label">Documents Processed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Retrieval Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">50K+</div>
+                    <div class="metric-label">Active Users</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">&lt;2s</div>
+                    <div class="metric-label">Response Time</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Technical Architecture</h2>
+            <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Tech Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">LangChain</span>
+                <span class="tech-badge">Pinecone</span>
+                <span class="tech-badge">GPT-4</span>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Redis</span>
+                <span class="tech-badge">AWS Lambda</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">PostgreSQL</span>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Key Features</h2>
+            <ul class="feature-list">
+                <li>
+                    <strong>Intelligent Document Chunking:</strong> Implemented semantic chunking strategies that 
+                    preserve context while optimizing for retrieval performance
+                </li>
+                <li>
+                    <strong>Hybrid Search:</strong> Combined dense vector search with keyword matching for improved 
+                    accuracy across different query types
+                </li>
+                <li>
+                    <strong>Real-time Indexing:</strong> Built streaming pipeline for incremental document updates 
+                    without service interruption
+                </li>
+                <li>
+                    <strong>Multi-modal Support:</strong> Handles PDFs, Word documents, spreadsheets, and images 
+                    with OCR integration
+                </li>
+                <li>
+                    <strong>Smart Caching:</strong> Implemented Redis caching layer reducing API costs by 60%
+                </li>
+                <li>
+                    <strong>Access Control:</strong> Fine-grained permissions ensuring users only access authorized documents
+                </li>
+            </ul>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Challenges & Solutions</h2>
+            <ul class="challenge-list">
+                <li>
+                    <strong>Challenge:</strong> Latency issues with large document sets<br>
+                    <strong>Solution:</strong> Implemented approximate nearest neighbor search and query optimization, 
+                    reducing response time from 8s to under 2s
+                </li>
+                <li>
+                    <strong>Challenge:</strong> High LLM API costs<br>
+                    <strong>Solution:</strong> Developed intelligent caching strategy and prompt optimization, 
+                    achieving 60% cost reduction
+                </li>
+                <li>
+                    <strong>Challenge:</strong> Maintaining context across long documents<br>
+                    <strong>Solution:</strong> Created custom chunking algorithm that preserves semantic boundaries 
+                    and includes contextual metadata
+                </li>
+                <li>
+                    <strong>Challenge:</strong> Scaling to handle peak loads<br>
+                    <strong>Solution:</strong> Architected serverless infrastructure with AWS Lambda and auto-scaling 
+                    Pinecone indexes
+                </li>
+            </ul>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Code Example</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                Sample implementation of the RAG pipeline:
+            </p>
+            <div class="code-block">
+<pre style="margin: 0; color: var(--text-primary);">
+from langchain.chains import RetrievalQA
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import Pinecone
+from langchain.llms import OpenAI
+
+# Initialize vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Pinecone.from_existing_index(
+    index_name="enterprise-docs",
+    embedding=embeddings
+)
+
+# Create RAG chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(model="gpt-4"),
+    retriever=vectorstore.as_retriever(
+        search_kwargs={"k": 5}
+    ),
+    return_source_documents=True
+)
+
+# Query the system
+result = qa_chain("What are the key terms in contract XYZ?")</pre>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Lessons Learned</h2>
+            <ul class="feature-list">
+                <li>
+                    Prompt engineering is crucial - small changes in prompt structure can significantly impact 
+                    response quality and consistency
+                </li>
+                <li>
+                    Hybrid search (combining dense and sparse retrieval) performs better than either approach alone 
+                    for enterprise use cases
+                </li>
+                <li>
+                    Investing in monitoring and observability early pays dividends when debugging complex AI systems
+                </li>
+                <li>
+                    User feedback loops are essential for continuous improvement of retrieval accuracy
+                </li>
+            </ul>
+        </div>
+
+        <div class="project-section">
+            <h2 class="section-title">Future Enhancements</h2>
+            <ul class="challenge-list">
+                <li>Integration with more data sources (Salesforce, ServiceNow, etc.)</li>
+                <li>Multi-language support for global operations</li>
+                <li>Advanced analytics dashboard for usage insights</li>
+                <li>Fine-tuned embedding models for domain-specific terminology</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="../index.html#projects" class="btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span>Back to Projects</span>
+            </a>
+        </div>
+    </div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script src="../script.js"></script>
+</body>
+</html>

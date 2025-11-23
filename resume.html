@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - AI Fullstack Developer | AI.DEV</title>
+    <meta name="description" content="Download resume of AI Fullstack Developer specializing in LLMs, RAG, and Modern AI Technologies">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .resume-page {
+            padding: calc(80px + 2rem) 1.5rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .resume-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .resume-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+        .resume-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .section-header {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+        .experience-item, .education-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .item-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .item-company {
+            font-size: 1.1rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.25rem;
+        }
+        .item-date {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .item-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+        .skill-category h4 {
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-tag {
+            padding: 0.4rem 0.9rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--accent-cyan);
+        }
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+        }
+        .achievements-list li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .achievements-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .main-nav, .download-btn, .neural-background {
+                display: none;
+            }
+            .resume-section {
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neural-background">
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                    <svg width="40" height="40" viewBox="0 0 40 40">
+                        <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" stroke="url(#grad)" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="20" r="3" fill="url(#grad)"/>
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff" />
+                                <stop offset="100%" style="stop-color:#7b2ff7" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">AI.DEV</span>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="btn-secondary" style="text-decoration: none;">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="resume-page">
+        <div class="resume-header">
+            <h1 class="resume-title">Resume / CV</h1>
+            <p style="color: var(--text-secondary); font-size: 1.125rem; margin-bottom: 1rem;">
+                AI Fullstack Developer & Machine Learning Engineer
+            </p>
+            <button class="download-btn" onclick="window.print()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M6 14H14M10 10V18M10 10L7 13M10 10L13 13M17 7C17 5.89543 16.1046 5 15 5H5C3.89543 5 3 5.89543 3 7V12C3 13.1046 3.89543 14 5 14H6M14 14H15C16.1046 14 17 13.1046 17 12V7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Download / Print PDF
+            </button>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Professional Summary</h2>
+            <p class="item-description">
+                Highly skilled Fullstack Developer and AI Engineer with 5+ years of experience building intelligent, 
+                scalable applications using cutting-edge AI technologies. Expert in Large Language Models (LLMs), 
+                Retrieval-Augmented Generation (RAG), Vector Databases, and modern web technologies. Proven track 
+                record of delivering production-ready AI solutions that drive business value and enhance user experiences.
+            </p>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Work Experience</h2>
+            
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Senior AI Engineer</h3>
+                        <p class="item-company">TechCorp AI Solutions</p>
+                    </div>
+                    <span class="item-date">2023 - Present</span>
+                </div>
+                <p class="item-description">
+                    Lead the development of enterprise RAG systems processing 10M+ documents with 95% accuracy. 
+                    Architected and deployed multi-agent AI systems for automated business workflows.
+                </p>
+                <ul class="achievements-list">
+                    <li>Built production RAG system using LangChain, Pinecone, and GPT-4 serving 50K+ users</li>
+                    <li>Reduced LLM costs by 60% through prompt optimization and caching strategies</li>
+                    <li>Implemented semantic search with ChromaDB achieving sub-50ms query latency</li>
+                    <li>Mentored team of 5 junior developers in AI/ML best practices</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Fullstack Developer</h3>
+                        <p class="item-company">InnovateTech Inc.</p>
+                    </div>
+                    <span class="item-date">2021 - 2023</span>
+                </div>
+                <p class="item-description">
+                    Developed and maintained full-stack applications using React, Node.js, and Python. 
+                    Integrated AI capabilities into existing products to enhance functionality.
+                </p>
+                <ul class="achievements-list">
+                    <li>Built real-time chat application with WebSocket and Redis handling 100K+ concurrent users</li>
+                    <li>Integrated OpenAI APIs for intelligent content generation features</li>
+                    <li>Optimized database queries reducing response time by 70%</li>
+                    <li>Implemented CI/CD pipelines using GitHub Actions and Docker</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Junior Software Developer</h3>
+                        <p class="item-company">StartupHub</p>
+                    </div>
+                    <span class="item-date">2020 - 2021</span>
+                </div>
+                <p class="item-description">
+                    Contributed to building scalable web applications and RESTful APIs. 
+                    Collaborated with cross-functional teams in an agile environment.
+                </p>
+                <ul class="achievements-list">
+                    <li>Developed 20+ RESTful API endpoints using FastAPI and Django</li>
+                    <li>Created responsive frontend components using React and Tailwind CSS</li>
+                    <li>Wrote comprehensive unit and integration tests achieving 85% code coverage</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>AI & Machine Learning</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LLMs</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">GPT-4</span>
+                        <span class="skill-tag">Claude</span>
+                        <span class="skill-tag">AI Agents</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Vector Databases</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Pinecone</span>
+                        <span class="skill-tag">Weaviate</span>
+                        <span class="skill-tag">ChromaDB</span>
+                        <span class="skill-tag">FAISS</span>
+                        <span class="skill-tag">Elasticsearch</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Backend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express</span>
+                        <span class="skill-tag">Go</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Frontend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">Vue.js</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Databases</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>DevOps & Cloud</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Bachelor of Science in Computer Science</h3>
+                        <p class="item-company">University of Technology</p>
+                    </div>
+                    <span class="item-date">2016 - 2020</span>
+                </div>
+                <p class="item-description">
+                    Focus: Artificial Intelligence, Machine Learning, and Software Engineering. 
+                    GPA: 3.8/4.0. Dean's List (2018-2020).
+                </p>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Certifications</h2>
+            <ul class="achievements-list">
+                <li>AWS Certified Solutions Architect - Associate (2024)</li>
+                <li>Google Cloud Professional Machine Learning Engineer (2023)</li>
+                <li>LangChain & Vector Databases in Production Certification (2024)</li>
+                <li>Advanced RAG Techniques Certification (2024)</li>
+                <li>Docker Certified Associate (2022)</li>
+            </ul>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Key Projects</h2>
+            <div class="experience-item">
+                <h3 class="item-title">Enterprise RAG System</h3>
+                <p class="item-description">
+                    Production-ready RAG system using LangChain, Pinecone, and GPT-4. Processes 10M+ documents 
+                    with 95% accuracy in information retrieval. Deployed on AWS with auto-scaling.
+                </p>
+            </div>
+            <div class="experience-item">
+                <h3 class="item-title">Multi-Agent AI System</h3>
+                <p class="item-description">
+                    Autonomous multi-agent system with specialized agents for research, writing, and coding. 
+                    Orchestrates complex workflows with 80% task completion rate using LangGraph.
+                </p>
+            </div>
+            <div class="experience-item">
+                <h3 class="item-title">Semantic Search Engine</h3>
+                <p class="item-description">
+                    Neural search engine using sentence transformers and ChromaDB. Achieves 92% relevance 
+                    in search results with sub-50ms query latency.
+                </p>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-header">Contact Information</h2>
+            <p class="item-description">
+                <strong>Email:</strong> contact@aidev.com<br>
+                <strong>LinkedIn:</strong> linkedin.com/in/bilawaldeveloper<br>
+                <strong>GitHub:</strong> github.com/BilawalDeveloper<br>
+                <strong>Portfolio:</strong> bilawaldeveloper.github.io/portfolio
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

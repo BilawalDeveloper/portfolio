@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private directories
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://bilawaldeveloper.github.io/portfolio/sitemap.xml

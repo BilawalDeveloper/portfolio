@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | AI.DEV</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .error-content {
+            max-width: 600px;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .error-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .error-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .error-visual {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="neural-background" id="neuralBg">
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-visual">
+                <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="80" stroke="url(#neuralGradient)" stroke-width="3" opacity="0.3"/>
+                    <circle cx="100" cy="100" r="60" stroke="url(#neuralGradient)" stroke-width="3" opacity="0.5"/>
+                    <circle cx="100" cy="100" r="40" stroke="url(#neuralGradient)" stroke-width="3" opacity="0.7"/>
+                    <path d="M80 90L90 100L80 110M120 90L110 100L120 110" stroke="url(#neuralGradient)" stroke-width="3" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.8" />
+                            <stop offset="50%" style="stop-color:#7b2ff7;stop-opacity:0.6" />
+                            <stop offset="100%" style="stop-color:#ff006e;stop-opacity:0.8" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-description">
+                Oops! The page you're looking for seems to have wandered into another dimension. 
+                Let's get you back on track.
+            </p>
+            <div class="error-actions">
+                <a href="index.html" class="btn-primary">
+                    <span>Back to Home</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </a>
+                <a href="index.html#contact" class="btn-secondary">
+                    <span>Contact Support</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
