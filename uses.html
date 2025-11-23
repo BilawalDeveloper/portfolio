@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools & Setup - AI.DEV | Development Stack</title>
+    <meta name="description" content="The tools, software, hardware, and AI APIs I use daily for development and AI engineering">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tools & Setup - AI.DEV">
+    <meta property="og:description" content="My complete development stack, tools, and equipment">
+    <meta property="og:url" content="https://bilawaldeveloper.github.io/portfolio/uses.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .uses-page {
+            padding: calc(80px + 2rem) 1.5rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .uses-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .uses-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .uses-intro {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .uses-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .uses-section h2 {
+            font-size: 1.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .tool-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-purple);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+            border-radius: 8px;
+            transition: all var(--transition-normal);
+        }
+        
+        .tool-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tool-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .tool-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .tool-link:hover {
+            text-decoration: underline;
+        }
+        
+        .tool-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        
+        .tool-tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .category-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .category-item h4 {
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .uses-title {
+                font-size: 2rem;
+            }
+            
+            .uses-section {
+                padding: 1.5rem;
+            }
+            
+            .uses-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .tool-header {
+                flex-direction: column;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neural Network Background -->
+    <div class="neural-background" id="neuralBg">
+        <svg class="neural-svg" id="neuralSvg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.8" />
+                    <stop offset="50%" style="stop-color:#7b2ff7;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:#ff006e;stop-opacity:0.8" />
+                </linearGradient>
+            </defs>
+        </svg>
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="logo-svg">
+                    <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                    <circle cx="20" cy="20" r="8" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                    <circle cx="20" cy="20" r="3" fill="url(#neuralGradient)"/>
+                </svg>
+                <a href="index.html" class="logo-text">AI.DEV</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="theme-icon sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1v6M12 17v6M23 12h-6M7 12H1M20.66 20.66l-4.24-4.24M7.58 7.58L3.34 3.34M20.66 3.34l-4.24 4.24M7.58 16.42l-4.24 4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="navLinks" role="navigation">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="now.html" class="nav-link">Now</a></li>
+                <li><a href="uses.html" class="nav-link active">Uses</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="uses-page">
+        <header class="uses-header">
+            <h1 class="uses-title">Tools & Setup</h1>
+            <p class="uses-intro">
+                The complete stack of tools, software, hardware, and AI services I use daily. 
+                This list is regularly updated to reflect my current setup.
+            </p>
+        </header>
+
+        <!-- Development Environment -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M7 8l3 3-3 3M12 14h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Development Environment
+            </h2>
+            
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Visual Studio Code</span>
+                    <a href="https://code.visualstudio.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    My primary code editor. Fast, extensible, and perfect for Python, JavaScript/TypeScript development. 
+                    Love the built-in terminal and Git integration.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Editor</span>
+                    <span class="tool-tag">Essential</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">PyCharm Professional</span>
+                    <a href="https://www.jetbrains.com/pycharm/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    For complex Python projects and debugging. Excellent refactoring tools and AI-assisted coding features.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">IDE</span>
+                    <span class="tool-tag">Python</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Cursor AI</span>
+                    <a href="https://cursor.sh/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    AI-native code editor that's revolutionizing how I write code. GPT-4 integration for intelligent code completion and generation.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">AI Editor</span>
+                    <span class="tool-tag">New</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">iTerm2 + Oh My Zsh</span>
+                    <a href="https://iterm2.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Terminal emulator with split panes, search, and autocomplete. Oh My Zsh with Powerlevel10k theme for a beautiful prompt.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Terminal</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Tools & APIs -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                AI Tools & APIs
+            </h2>
+            
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">OpenAI API (GPT-4 & GPT-4 Turbo)</span>
+                    <a href="https://platform.openai.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Primary LLM for most projects. Excellent for reasoning, code generation, and general intelligence tasks. 
+                    GPT-4 Turbo for cost-effective high-volume applications.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">LLM</span>
+                    <span class="tool-tag">Essential</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Anthropic Claude 3.5 Sonnet</span>
+                    <a href="https://www.anthropic.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Preferred for complex reasoning, long context tasks (200K tokens), and coding. Excellent at following instructions precisely.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">LLM</span>
+                    <span class="tool-tag">Long Context</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">LangChain & LangSmith</span>
+                    <a href="https://www.langchain.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Framework for building LLM applications. LangSmith for debugging and monitoring LLM chains in production.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Framework</span>
+                    <span class="tool-tag">Monitoring</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Pinecone Vector Database</span>
+                    <a href="https://www.pinecone.io/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Go-to vector database for RAG applications. Serverless, fast, and scales effortlessly. Excellent developer experience.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Vector DB</span>
+                    <span class="tool-tag">RAG</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Hugging Face Transformers</span>
+                    <a href="https://huggingface.co/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    For custom embeddings, fine-tuning, and accessing open-source models. Essential for research and experimentation.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Open Source</span>
+                    <span class="tool-tag">Models</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Replicate</span>
+                    <a href="https://replicate.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Running open-source AI models via API. Great for Stable Diffusion, voice cloning, and other specialized models.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Model Hosting</span>
+                    <span class="tool-tag">API</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design & Productivity -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                    <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                    <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                    <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Design & Productivity
+            </h2>
+            
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Figma</span>
+                    <a href="https://www.figma.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    UI/UX design and prototyping. Collaborative design tool for creating interfaces and design systems.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Design</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Notion</span>
+                    <a href="https://www.notion.so/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    All-in-one workspace for notes, documentation, project planning, and knowledge management. Life saver for organizing information.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Productivity</span>
+                    <span class="tool-tag">Essential</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Obsidian</span>
+                    <a href="https://obsidian.md/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Personal knowledge base using markdown. Perfect for technical notes and creating a second brain.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Notes</span>
+                    <span class="tool-tag">Knowledge</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">ChatGPT Plus & Claude Pro</span>
+                    <a href="https://chat.openai.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Daily AI assistants for brainstorming, code review, research, and problem-solving. Essential for productivity.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">AI Assistant</span>
+                    <span class="tool-tag">Daily Use</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Tools -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Development Tools
+            </h2>
+            
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Docker Desktop</span>
+                    <a href="https://www.docker.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Containerization for consistent development environments. Essential for microservices and deployment.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Containers</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Postman</span>
+                    <a href="https://www.postman.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    API development and testing. Organizing endpoints, writing tests, and documenting APIs.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">API Testing</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Git + GitHub</span>
+                    <a href="https://github.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Version control and collaboration. GitHub for hosting, CI/CD with Actions, and issue tracking.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Version Control</span>
+                    <span class="tool-tag">Essential</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Insomnia</span>
+                    <a href="https://insomnia.rest/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Alternative to Postman for GraphQL APIs and REST endpoints. Clean interface and excellent GraphQL support.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">API Client</span>
+                    <span class="tool-tag">GraphQL</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware Setup -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Hardware Setup
+            </h2>
+            
+            <div class="category-grid">
+                <div class="category-item">
+                    <h4>💻 Primary Computer</h4>
+                    <p>MacBook Pro 16" M3 Max<br>64GB RAM, 2TB SSD<br>Perfect for ML workloads</p>
+                </div>
+                
+                <div class="category-item">
+                    <h4>🖥️ Display</h4>
+                    <p>LG UltraFine 4K 27"<br>External display for extended workspace</p>
+                </div>
+                
+                <div class="category-item">
+                    <h4>⌨️ Keyboard</h4>
+                    <p>Keychron K8 Pro<br>Mechanical keyboard with hot-swappable switches</p>
+                </div>
+                
+                <div class="category-item">
+                    <h4>🖱️ Mouse</h4>
+                    <p>Logitech MX Master 3S<br>Ergonomic wireless mouse</p>
+                </div>
+                
+                <div class="category-item">
+                    <h4>🎧 Headphones</h4>
+                    <p>Sony WH-1000XM5<br>Noise-canceling for deep focus</p>
+                </div>
+                
+                <div class="category-item">
+                    <h4>🎙️ Microphone</h4>
+                    <p>Blue Yeti USB<br>For meetings and recordings</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VS Code Extensions -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Essential VS Code Extensions
+            </h2>
+            
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">GitHub Copilot</span>
+                </div>
+                <p class="tool-description">
+                    AI pair programmer. Suggests entire functions and helps with boilerplate code. Massive productivity boost.
+                </p>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Python</span>
+                </div>
+                <p class="tool-description">
+                    IntelliSense, linting, debugging, and Jupyter notebooks support for Python development.
+                </p>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">ESLint & Prettier</span>
+                </div>
+                <p class="tool-description">
+                    Code formatting and linting for JavaScript/TypeScript. Keeps code clean and consistent.
+                </p>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">GitLens</span>
+                </div>
+                <p class="tool-description">
+                    Supercharges Git capabilities. Inline blame, history, and powerful search features.
+                </p>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Thunder Client</span>
+                </div>
+                <p class="tool-description">
+                    Lightweight REST API client directly in VS Code. Perfect for quick API testing.
+                </p>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Error Lens</span>
+                </div>
+                <p class="tool-description">
+                    Highlights errors inline. Makes debugging faster by showing errors right where they occur.
+                </p>
+            </div>
+        </section>
+
+        <!-- Cloud & Hosting -->
+        <section class="uses-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Cloud & Hosting
+            </h2>
+            
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">AWS (Amazon Web Services)</span>
+                    <a href="https://aws.amazon.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Primary cloud provider. Using EC2, Lambda, S3, RDS, and SageMaker for various projects.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Cloud</span>
+                    <span class="tool-tag">Primary</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Vercel</span>
+                    <a href="https://vercel.com/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Frontend deployment platform. Perfect for Next.js and React apps with automatic deployments.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Hosting</span>
+                    <span class="tool-tag">Frontend</span>
+                </div>
+            </div>
+
+            <div class="tool-item">
+                <div class="tool-header">
+                    <span class="tool-name">Railway</span>
+                    <a href="https://railway.app/" class="tool-link" target="_blank" rel="noopener">
+                        Visit →
+                    </a>
+                </div>
+                <p class="tool-description">
+                    Simple deployment for backend services. Great for Python APIs and databases.
+                </p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Hosting</span>
+                    <span class="tool-tag">Backend</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg width="40" height="40" viewBox="0 0 40 40" class="logo-svg">
+                            <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="8" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="3" fill="url(#neuralGradient)"/>
+                        </svg>
+                        <span class="logo-text">AI.DEV</span>
+                    </div>
+                    <p class="footer-description">Building the future with AI, one project at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#projects">Projects</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="uses.html">Uses</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://github.com/BilawalDeveloper" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="https://linkedin.com/in/bilawaldeveloper" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://twitter.com/bilawaldeveloper" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI.DEV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

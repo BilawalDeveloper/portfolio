@@ -8,6 +8,9 @@
     <meta name="author" content="AI.DEV">
     <title>AI Fullstack Developer Portfolio | Expert in LLMs & Modern AI</title>
     
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="AI.DEV Blog Feed" href="feed.xml">
+    
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="AI Fullstack Developer Portfolio">
@@ -29,12 +32,49 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0a0e27">
     
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "AI.DEV",
+      "jobTitle": "Fullstack Developer & AI Engineer",
+      "url": "https://bilawaldeveloper.github.io/portfolio/",
+      "sameAs": [
+        "https://github.com/BilawalDeveloper",
+        "https://linkedin.com/in/bilawaldeveloper",
+        "https://twitter.com/bilawaldeveloper"
+      ],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Large Language Models",
+        "RAG Systems",
+        "Vector Databases",
+        "Full Stack Development",
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "AI Engineer & Full Stack Developer",
+        "skills": "LLMs, RAG, Vector Databases, LangChain, Python, React, Next.js"
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Neural Network SVG Background -->
     <div class="neural-background" id="neuralBg">
         <svg class="neural-svg" id="neuralSvg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -88,15 +128,18 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="resume.html" class="nav-link">Resume</a></li>
+                <li><a href="now.html" class="nav-link">Now</a></li>
+                <li><a href="uses.html" class="nav-link">Uses</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero-section" role="main">
+        <main id="main-content">
         <div class="hero-content">
             <div class="hero-text">
                 <div class="status-badge">
@@ -144,6 +187,7 @@
                 </div>
             </div>
         </div>
+        </main>
     </section>
 
     <!-- About Section -->
@@ -453,12 +497,22 @@
                             <span class="tag">Pinecone</span>
                             <span class="tag">GPT-4</span>
                         </div>
-                        <a href="projects/enterprise-rag-system.html" class="project-link">
-                            View Details
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </a>
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;">
+                            <a href="projects/enterprise-rag-system.html" class="project-link">
+                                View Details
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </a>
+                            <button class="share-btn" data-title="Enterprise RAG System" data-text="Check out this AI project: Enterprise RAG System" data-url="https://bilawaldeveloper.github.io/portfolio/projects/enterprise-rag-system.html" aria-label="Share this project">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor">
+                                    <circle cx="4" cy="8" r="2" stroke-width="1.5"/>
+                                    <circle cx="12" cy="4" r="2" stroke-width="1.5"/>
+                                    <circle cx="12" cy="12" r="2" stroke-width="1.5"/>
+                                    <path d="M6 7l4-2M6 9l4 2" stroke-width="1.5"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 

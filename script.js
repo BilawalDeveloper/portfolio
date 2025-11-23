@@ -839,3 +839,104 @@ window.addEventListener('resize', debounce(() => {
         canvas.height = window.innerHeight;
     }
 }, 250));
+
+// ===== WEB SHARE API =====
+// Add share functionality to project cards
+document.addEventListener('DOMContentLoaded', () => {
+    const shareButtons = document.querySelectorAll('.share-btn');
+    
+    shareButtons.forEach(button => {
+        button.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const title = button.dataset.title;
+            const text = button.dataset.text;
+            const url = button.dataset.url;
+            
+            // Check if Web Share API is supported
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: title,
+                        text: text,
+                        url: url
+                    });
+                } catch (error) {
+                    // User cancelled or error occurred
+                    if (error.name !== 'AbortError') {
+                        fallbackShare(url);
+                    }
+                }
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                fallbackShare(url);
+            }
+        });
+    });
+});
+
+// Fallback share function (copy to clipboard)
+function fallbackShare(url) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+            // Show a temporary notification
+            const notification = document.createElement('div');
+            notification.textContent = 'Link copied to clipboard!';
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            alert('Failed to copy link. Please copy manually: ' + url);
+        });
+    } else {
+        // Final fallback - just show the URL
+        alert('Share this link: ' + url);
+    }
+}
+
+// Add animation keyframes dynamically
+if (!document.getElementById('share-animations')) {
+    const style = document.createElement('style');
+    style.id = 'share-animations';
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}

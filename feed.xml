@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>AI.DEV Blog - AI &amp; Machine Learning Insights</title>
+    <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+    <atom:link href="https://bilawaldeveloper.github.io/portfolio/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Articles about AI, Machine Learning, LLMs, RAG systems, and modern web development</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <pubDate>Mon, 23 Jan 2025 00:00:00 +0000</pubDate>
+    <ttl>1800</ttl>
+    
+    <item>
+        <title>Building Production-Ready RAG Systems in 2025</title>
+        <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+        <description>A comprehensive guide to implementing Retrieval-Augmented Generation systems with LangChain, Pinecone, and GPT-4. Learn about chunking strategies, embeddings, and optimization techniques.</description>
+        <author>AI.DEV</author>
+        <category>RAG</category>
+        <category>LangChain</category>
+        <category>AI</category>
+        <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
+        <guid isPermaLink="false">rag-systems-2025</guid>
+    </item>
+    
+    <item>
+        <title>Advanced Prompt Engineering Techniques for GPT-4</title>
+        <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+        <description>Master the art of prompt engineering with practical examples and best practices for GPT-4, Claude, and other LLMs. Includes tips on few-shot learning, chain-of-thought, and more.</description>
+        <author>AI.DEV</author>
+        <category>Prompt Engineering</category>
+        <category>LLMs</category>
+        <category>GPT-4</category>
+        <pubDate>Mon, 13 Jan 2025 00:00:00 +0000</pubDate>
+        <guid isPermaLink="false">prompt-engineering</guid>
+    </item>
+    
+    <item>
+        <title>Vector Databases: A Deep Dive</title>
+        <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+        <description>Explore the world of vector databases including Pinecone, Weaviate, ChromaDB, and FAISS. Compare features, performance, and use cases for semantic search applications.</description>
+        <author>AI.DEV</author>
+        <category>Vector Databases</category>
+        <category>Embeddings</category>
+        <category>AI</category>
+        <pubDate>Mon, 6 Jan 2025 00:00:00 +0000</pubDate>
+        <guid isPermaLink="false">vector-databases</guid>
+    </item>
+    
+    <item>
+        <title>Building AI Agents with LangGraph and Claude 3.5</title>
+        <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+        <description>Learn how to build autonomous AI agents using LangGraph for orchestration and Claude 3.5 for intelligence. Includes multi-agent systems, tool use, and best practices.</description>
+        <author>AI.DEV</author>
+        <category>AI Agents</category>
+        <category>LangGraph</category>
+        <category>Claude</category>
+        <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+        <guid isPermaLink="false">ai-agents-langgraph</guid>
+    </item>
+    
+    <item>
+        <title>Fine-tuning LLMs: A Practical Guide</title>
+        <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+        <description>Step-by-step guide to fine-tuning large language models using LoRA and QLoRA techniques. Includes dataset preparation, training strategies, and evaluation methods.</description>
+        <author>AI.DEV</author>
+        <category>Fine-tuning</category>
+        <category>LLMs</category>
+        <category>Machine Learning</category>
+        <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
+        <guid isPermaLink="false">fine-tuning-llms</guid>
+    </item>
+    
+    <item>
+        <title>Semantic Search with Embeddings</title>
+        <link>https://bilawaldeveloper.github.io/portfolio/blog.html</link>
+        <description>Implement powerful semantic search using sentence transformers and embeddings. Learn about hybrid search, reranking, and optimization techniques for production systems.</description>
+        <author>AI.DEV</author>
+        <category>Search</category>
+        <category>Embeddings</category>
+        <category>NLP</category>
+        <pubDate>Mon, 16 Dec 2024 00:00:00 +0000</pubDate>
+        <guid isPermaLink="false">semantic-search</guid>
+    </item>
+
+</channel>
+</rss>
