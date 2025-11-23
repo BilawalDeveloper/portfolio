@@ -7,6 +7,8 @@ class ParticleSystem {
         this.connections = [];
         this.mouse = { x: 0, y: 0 };
         this.particleCount = 80;
+        this.isPaused = false;
+        this.animationId = null;
         
         this.resize();
         this.init();
@@ -42,6 +44,8 @@ class ParticleSystem {
     }
     
     update() {
+        if (this.isPaused) return;
+        
         this.particles.forEach(particle => {
             particle.x += particle.vx;
             particle.y += particle.vy;
@@ -104,7 +108,23 @@ class ParticleSystem {
     animate() {
         this.update();
         this.draw();
-        requestAnimationFrame(() => this.animate());
+        this.animationId = requestAnimationFrame(() => this.animate());
+    }
+    
+    pause() {
+        this.isPaused = true;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+    
+    resume() {
+        this.isPaused = false;
+    }
+    
+    destroy() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
 
@@ -299,57 +319,80 @@ function initCubeInteraction() {
 
 // ===== CUSTOM CURSOR =====
 function initCustomCursor() {
-    if (window.matchMedia('(pointer: fine)').matches) {
-        const cursor = document.createElement('div');
-        cursor.classList.add('custom-cursor');
-        document.body.appendChild(cursor);
-        
-        const cursorDot = document.createElement('div');
-        cursorDot.classList.add('custom-cursor-dot');
-        document.body.appendChild(cursorDot);
-        
-        let mouseX = 0;
-        let mouseY = 0;
-        let cursorX = 0;
-        let cursorY = 0;
-        let dotX = 0;
-        let dotY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        
-        function animateCursor() {
-            // Smooth cursor follow
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            dotX += (mouseX - dotX) * 0.2;
-            dotY += (mouseY - dotY) * 0.2;
-            
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            cursorDot.style.left = dotX + 'px';
-            cursorDot.style.top = dotY + 'px';
-            
-            requestAnimationFrame(animateCursor);
-        }
-        
-        animateCursor();
-        
-        // Cursor hover effects
-        document.querySelectorAll('a, button, .project-card, .skill-category-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-            });
-        });
+    // Check for fine pointer (not touch) and no reduced motion preference
+    const hasReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    
+    // Don't initialize custom cursor if user prefers reduced motion or using touch
+    if (hasReducedMotion || !hasFinePointer) {
+        return;
     }
+    
+    // Check if user has disabled custom cursor via settings
+    const customCursorDisabled = localStorage.getItem('disableCustomCursor') === 'true';
+    if (customCursorDisabled) {
+        document.body.classList.add('disable-custom-cursor');
+        return;
+    }
+    
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    document.body.appendChild(cursor);
+    
+    const cursorDot = document.createElement('div');
+    cursorDot.classList.add('custom-cursor-dot');
+    document.body.appendChild(cursorDot);
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let dotX = 0;
+    let dotY = 0;
+    
+    // Show cursors after first mouse move
+    let hasMovedMouse = false;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        if (!hasMovedMouse) {
+            hasMovedMouse = true;
+            cursor.style.opacity = '1';
+            cursorDot.style.opacity = '1';
+        }
+    });
+    
+    function animateCursor() {
+        // Smooth cursor follow
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+        dotX += (mouseX - dotX) * 0.2;
+        dotY += (mouseY - dotY) * 0.2;
+        
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    
+    animateCursor();
+    
+    // Cursor hover effects
+    document.querySelectorAll('a, button, .project-card, .skill-category-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
 }
 
 // ===== SKILL BARS ANIMATION =====
@@ -732,29 +775,83 @@ function initCookieConsent() {
     });
 }
 
+// ===== PERFORMANCE MODE =====
+let globalParticleSystem = null;
+let globalNeuralNetwork = null;
+
+function initPerformanceMode() {
+    // Check for reduced motion preference
+    const hasReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const performanceMode = localStorage.getItem('performanceMode') === 'true' || hasReducedMotion;
+    
+    if (performanceMode) {
+        document.body.classList.add('performance-mode');
+        if (globalParticleSystem) {
+            globalParticleSystem.pause();
+        }
+    }
+}
+
+function togglePerformanceMode() {
+    const isPerformanceMode = document.body.classList.toggle('performance-mode');
+    localStorage.setItem('performanceMode', isPerformanceMode);
+    
+    if (globalParticleSystem) {
+        if (isPerformanceMode) {
+            globalParticleSystem.pause();
+        } else {
+            globalParticleSystem.resume();
+        }
+    }
+    
+    // Toggle animations
+    const aiCube = document.getElementById('aiCube');
+    if (aiCube) {
+        if (isPerformanceMode) {
+            aiCube.style.animation = 'none';
+        } else {
+            aiCube.style.animation = '';
+        }
+    }
+    
+    return isPerformanceMode;
+}
+
 // ===== INITIALIZE EVERYTHING =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize particle system
+    // Check for reduced motion preference first
+    const hasReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const performanceMode = localStorage.getItem('performanceMode') === 'true';
+    
+    // Initialize particle system (skip if reduced motion or performance mode)
     const canvas = document.getElementById('particleCanvas');
-    if (canvas) {
-        const particleSystem = new ParticleSystem(canvas);
-        particleSystem.animate();
+    if (canvas && !hasReducedMotion && !performanceMode) {
+        globalParticleSystem = new ParticleSystem(canvas);
+        globalParticleSystem.animate();
         
         // Update mouse position for particle system
         document.addEventListener('mousemove', (e) => {
-            particleSystem.mouse.x = e.clientX;
-            particleSystem.mouse.y = e.clientY;
+            if (globalParticleSystem) {
+                globalParticleSystem.mouse.x = e.clientX;
+                globalParticleSystem.mouse.y = e.clientY;
+            }
         });
+    } else if (canvas) {
+        // Create but don't animate if reduced motion
+        globalParticleSystem = new ParticleSystem(canvas);
+        globalParticleSystem.pause();
     }
     
-    // Initialize neural network
+    // Initialize neural network (skip if reduced motion or performance mode)
     const neuralSvg = document.getElementById('neuralSvg');
-    if (neuralSvg) {
-        const network = new NeuralNetwork(neuralSvg);
+    if (neuralSvg && !hasReducedMotion && !performanceMode) {
+        globalNeuralNetwork = new NeuralNetwork(neuralSvg);
         
         // Update neural network on mouse move
         document.addEventListener('mousemove', (e) => {
-            network.updateMousePosition(e.clientX, e.clientY);
+            if (globalNeuralNetwork) {
+                globalNeuralNetwork.updateMousePosition(e.clientX, e.clientY);
+            }
         });
     }
     
@@ -762,19 +859,26 @@ document.addEventListener('DOMContentLoaded', () => {
     initTiltEffect();
     initSmoothScroll();
     initScrollAnimations();
-    initCubeInteraction();
+    if (!hasReducedMotion && !performanceMode) {
+        initCubeInteraction();
+    }
     initCustomCursor();
     animateSkillBars();
     initProjectGlowEffect();
-    initTypingEffect();
+    if (!hasReducedMotion && !performanceMode) {
+        initTypingEffect();
+    }
     initFormSubmission();
-    initParallaxEffect();
+    if (!hasReducedMotion && !performanceMode) {
+        initParallaxEffect();
+    }
     initNavigationActiveState();
     initMobileMenu();
     initThemeToggle();
     initBackToTop();
     initScrollProgress();
     initCookieConsent();
+    initPerformanceMode();
     
     // Add active class to nav links on scroll
     const navStyle = document.createElement('style');

@@ -57,6 +57,40 @@ body.light-theme {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+    
+    /* Disable particle canvas and neural network */
+    #particleCanvas,
+    .neural-svg {
+        display: none !important;
+    }
+}
+
+/* Performance mode - user can manually enable this */
+body.performance-mode {
+    #particleCanvas,
+    .neural-svg {
+        display: none;
+    }
+    
+    .ai-cube {
+        animation: none !important;
+    }
+    
+    .logo-svg {
+        animation: none !important;
+    }
+    
+    .status-badge {
+        animation: none !important;
+    }
+    
+    .title-line {
+        animation: none !important;
+    }
+    
+    .ai-gradient {
+        animation: none !important;
+    }
 }
 
 html {
@@ -1128,10 +1162,6 @@ body.light-theme .moon-icon {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
     .hero-title {
         font-size: 2rem;
     }
@@ -1154,12 +1184,13 @@ body.light-theme .moon-icon {
 }
 
 /* ===== CUSTOM CURSOR EFFECT ===== */
-@media (pointer: fine) {
-    body {
-        cursor: none;
+/* Only enable custom cursor on devices with fine pointer AND when user hasn't requested reduced motion */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    body:not(.disable-custom-cursor) {
+        cursor: default;
     }
     
-    body::before {
+    body:not(.disable-custom-cursor)::before {
         content: '';
         position: fixed;
         width: 10px;
@@ -1169,9 +1200,10 @@ body.light-theme .moon-icon {
         pointer-events: none;
         z-index: 10000;
         transition: transform 0.1s ease;
+        opacity: 0;
     }
     
-    body::after {
+    body:not(.disable-custom-cursor)::after {
         content: '';
         position: fixed;
         width: 40px;
@@ -1181,6 +1213,7 @@ body.light-theme .moon-icon {
         pointer-events: none;
         z-index: 10000;
         transition: transform 0.2s ease;
+        opacity: 0;
     }
 }
 
