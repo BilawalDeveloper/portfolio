@@ -469,53 +469,59 @@ function initFormSubmission() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Check honeypot (spam prevention)
-        if (honeypot.value) {
-            return; // Bot detected, silently fail
-        }
-        
-        // Validate all fields
-        const isNameValid = validateField(nameInput, 'nameError', nameInput.value.trim().length >= 2, 'Name must be at least 2 characters');
-        const isEmailValid = validateField(emailInput, 'emailError', emailRegex.test(emailInput.value.trim()), 'Please enter a valid email');
-        const isMessageValid = validateField(messageInput, 'messageError', messageInput.value.trim().length >= 10, 'Message must be at least 10 characters');
-        
-        if (!isNameValid || !isEmailValid || !isMessageValid) {
-            showFormMessage('Please fix the errors above', 'error');
-            return;
-        }
-        
-        // Disable submit button and show loading
-        submitBtn.disabled = true;
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Sending...</span>';
-        
         try {
-            // Simulate API call (replace with actual backend endpoint)
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // Check honeypot (spam prevention)
+            if (honeypot.value) {
+                return; // Bot detected, silently fail
+            }
             
-            // For demo purposes - in production, send to your backend
-            const formData = {
-                name: nameInput.value.trim(),
-                email: emailInput.value.trim(),
-                message: messageInput.value.trim()
-            };
+            // Validate all fields
+            const isNameValid = validateField(nameInput, 'nameError', nameInput.value.trim().length >= 2, 'Name must be at least 2 characters');
+            const isEmailValid = validateField(emailInput, 'emailError', emailRegex.test(emailInput.value.trim()), 'Please enter a valid email');
+            const isMessageValid = validateField(messageInput, 'messageError', messageInput.value.trim().length >= 10, 'Message must be at least 10 characters');
             
-            console.log('Form data:', formData);
+            if (!isNameValid || !isEmailValid || !isMessageValid) {
+                showFormMessage('Please fix the errors above', 'error');
+                return;
+            }
             
-            // Success
-            showFormMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
-            form.reset();
+            // Disable submit button and show loading
+            submitBtn.disabled = true;
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Sending...</span>';
             
-            // Clear validation states
-            [nameInput, emailInput, messageInput].forEach(input => {
-                input.classList.remove('valid', 'invalid');
-            });
-            
+            try {
+                // Simulate API call (replace with actual backend endpoint)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // For demo purposes - in production, send to your backend
+                const formData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    message: messageInput.value.trim()
+                };
+                
+                console.log('Form data:', formData);
+                
+                // Success
+                showFormMessage('✓ Message sent successfully! We\'ll get back to you soon.', 'success');
+                form.reset();
+                
+                // Clear validation states
+                [nameInput, emailInput, messageInput].forEach(input => {
+                    input.classList.remove('valid', 'invalid');
+                });
+                
+            } catch (error) {
+                showFormMessage('✗ Failed to send message. Please try again later.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
         } catch (error) {
-            showFormMessage('✗ Failed to send message. Please try again later.', 'error');
-        } finally {
+            console.error('Form submission error:', error);
+            showFormMessage('✗ An unexpected error occurred. Please try again.', 'error');
             submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
         }
     });
     
@@ -601,6 +607,15 @@ function initMobileMenu() {
         const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
         menuToggle.setAttribute('aria-expanded', !isExpanded);
         navLinks.classList.toggle('active');
+        
+        // Focus management
+        if (!isExpanded) {
+            // Menu opening - focus first link
+            const firstLink = navLinks.querySelector('.nav-link');
+            if (firstLink) {
+                setTimeout(() => firstLink.focus(), 100);
+            }
+        }
     });
     
     // Close menu when clicking on a link
@@ -608,6 +623,7 @@ function initMobileMenu() {
         link.addEventListener('click', () => {
             menuToggle.setAttribute('aria-expanded', 'false');
             navLinks.classList.remove('active');
+            menuToggle.focus();
         });
     });
     
@@ -616,6 +632,7 @@ function initMobileMenu() {
         if (e.key === 'Escape' && navLinks.classList.contains('active')) {
             menuToggle.setAttribute('aria-expanded', 'false');
             navLinks.classList.remove('active');
+            menuToggle.focus();
         }
     });
 }
