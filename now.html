@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What I'm Doing Now - AI.DEV</title>
+    <meta name="description" content="Current projects, learning journey, and professional status - Updated regularly">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="What I'm Doing Now - AI.DEV">
+    <meta property="og:description" content="Current projects, learning journey, and professional status">
+    <meta property="og:url" content="https://bilawaldeveloper.github.io/portfolio/now.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .now-page {
+            padding: calc(80px + 2rem) 1.5rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .now-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .now-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .now-intro {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .last-updated {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .now-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .now-section h2 {
+            font-size: 1.75rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .now-section h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .now-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .now-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .now-section li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .now-section li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 25px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            padding: 0.4rem 0.8rem;
+            background: rgba(123, 47, 247, 0.1);
+            border: 1px solid rgba(123, 47, 247, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+        }
+        
+        .achievement-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        
+        .achievement-date {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .now-title {
+                font-size: 2rem;
+            }
+            
+            .now-section {
+                padding: 1.5rem;
+            }
+            
+            .now-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neural Network Background -->
+    <div class="neural-background" id="neuralBg">
+        <svg class="neural-svg" id="neuralSvg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.8" />
+                    <stop offset="50%" style="stop-color:#7b2ff7;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:#ff006e;stop-opacity:0.8" />
+                </linearGradient>
+            </defs>
+        </svg>
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="logo-svg">
+                    <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                    <circle cx="20" cy="20" r="8" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                    <circle cx="20" cy="20" r="3" fill="url(#neuralGradient)"/>
+                </svg>
+                <a href="index.html" class="logo-text">AI.DEV</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="theme-icon sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1v6M12 17v6M23 12h-6M7 12H1M20.66 20.66l-4.24-4.24M7.58 7.58L3.34 3.34M20.66 3.34l-4.24 4.24M7.58 16.42l-4.24 4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="navLinks" role="navigation">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="now.html" class="nav-link active">Now</a></li>
+                <li><a href="uses.html" class="nav-link">Uses</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="now-page">
+        <header class="now-header">
+            <h1 class="now-title">What I'm Doing Now</h1>
+            <p class="now-intro">
+                A snapshot of my current focus, projects, and learning journey. 
+                Inspired by the <a href="https://nownownow.com/about" target="_blank" rel="noopener" style="color: var(--accent-cyan);">now page movement</a>.
+            </p>
+            <span class="last-updated">Last updated: January 2025</span>
+        </header>
+
+        <!-- Availability Status -->
+        <section class="now-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Current Availability
+            </h2>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <strong style="color: #10b981;">Available for Select Projects</strong>
+            </div>
+            <p>
+                I'm currently accepting new consulting and freelance projects, particularly in:
+            </p>
+            <ul>
+                <li>Enterprise RAG System implementations</li>
+                <li>AI Agent development and orchestration</li>
+                <li>LLM integration and optimization</li>
+                <li>Vector database architecture and setup</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                <strong>Response time:</strong> 24-48 hours for project inquiries
+            </p>
+        </section>
+
+        <!-- Current Projects -->
+        <section class="now-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Active Projects
+            </h2>
+            
+            <h3>🚀 Multi-Modal AI Assistant Platform</h3>
+            <p>
+                Building a comprehensive AI assistant that combines vision, voice, and text capabilities. 
+                The system uses GPT-4 Vision, Whisper for speech-to-text, and ElevenLabs for natural voice responses.
+            </p>
+            <div class="tech-tags">
+                <span class="tech-tag">GPT-4 Vision</span>
+                <span class="tech-tag">Whisper</span>
+                <span class="tech-tag">LangChain</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">React</span>
+            </div>
+
+            <h3>🔍 Neural Search Engine</h3>
+            <p>
+                Developing an advanced semantic search engine using hybrid retrieval strategies. 
+                Combines dense embeddings with sparse retrieval for optimal accuracy.
+            </p>
+            <div class="tech-tags">
+                <span class="tech-tag">Sentence Transformers</span>
+                <span class="tech-tag">Pinecone</span>
+                <span class="tech-tag">Elasticsearch</span>
+                <span class="tech-tag">Python</span>
+            </div>
+
+            <h3>🤖 Autonomous Agent Framework</h3>
+            <p>
+                Creating a framework for building autonomous AI agents that can plan, execute, and learn from tasks. 
+                Focuses on tool use and multi-step reasoning.
+            </p>
+            <div class="tech-tags">
+                <span class="tech-tag">LangGraph</span>
+                <span class="tech-tag">Claude 3.5</span>
+                <span class="tech-tag">Function Calling</span>
+                <span class="tech-tag">TypeScript</span>
+            </div>
+        </section>
+
+        <!-- Learning & Skills -->
+        <section class="now-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Currently Learning
+            </h2>
+            
+            <ul>
+                <li><strong>Advanced LLM Fine-tuning:</strong> Exploring QLoRA and full fine-tuning techniques for specialized domain models</li>
+                <li><strong>Multi-Agent Orchestration:</strong> Deep dive into CrewAI and AutoGen for complex agent workflows</li>
+                <li><strong>Real-time AI:</strong> Building streaming LLM applications with Server-Sent Events and WebSockets</li>
+                <li><strong>Graph RAG:</strong> Implementing knowledge graph-enhanced retrieval systems using Neo4j</li>
+                <li><strong>AI Security:</strong> Studying prompt injection prevention, jailbreak detection, and safe AI deployment</li>
+                <li><strong>Edge AI:</strong> Optimizing LLMs for edge deployment with quantization and distillation</li>
+            </ul>
+        </section>
+
+        <!-- Recent Achievements -->
+        <section class="now-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                Recent Achievements
+            </h2>
+            
+            <div class="achievement-card">
+                <div class="achievement-date">January 2025</div>
+                <p class="achievement-text">
+                    <strong>Successfully deployed enterprise RAG system</strong> processing 15M+ documents with 97% accuracy for Fortune 500 client
+                </p>
+            </div>
+            
+            <div class="achievement-card">
+                <div class="achievement-date">December 2024</div>
+                <p class="achievement-text">
+                    <strong>Published article on Advanced RAG Techniques</strong> that received 10K+ views and was featured on AI Weekly newsletter
+                </p>
+            </div>
+            
+            <div class="achievement-card">
+                <div class="achievement-date">November 2024</div>
+                <p class="achievement-text">
+                    <strong>Open-sourced LangChain template</strong> for building production-ready AI agents - 500+ GitHub stars in first month
+                </p>
+            </div>
+            
+            <div class="achievement-card">
+                <div class="achievement-date">October 2024</div>
+                <p class="achievement-text">
+                    <strong>Achieved AWS Machine Learning Specialty certification</strong> with focus on SageMaker and ML deployment patterns
+                </p>
+            </div>
+        </section>
+
+        <!-- Personal Focus -->
+        <section class="now-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 8v4l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Beyond Work
+            </h2>
+            
+            <p>
+                When I'm not coding, I'm focused on:
+            </p>
+            <ul>
+                <li>Contributing to open-source AI projects and tools</li>
+                <li>Writing technical articles about AI engineering best practices</li>
+                <li>Mentoring junior developers interested in AI/ML</li>
+                <li>Staying current with latest AI research papers and implementations</li>
+                <li>Building demo projects to test new AI capabilities</li>
+            </ul>
+        </section>
+
+        <!-- Location & Work Style -->
+        <section class="now-section">
+            <h2>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Location & Work Style
+            </h2>
+            
+            <p>
+                <strong>Based:</strong> Working remotely, available worldwide<br>
+                <strong>Time Zone:</strong> Flexible - I work across multiple time zones<br>
+                <strong>Work Style:</strong> Async-first with scheduled sync meetings<br>
+                <strong>Preferred Communication:</strong> Email for detailed discussions, Slack for quick questions
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg width="40" height="40" viewBox="0 0 40 40" class="logo-svg">
+                            <path d="M20 5 L35 15 L35 25 L20 35 L5 25 L5 15 Z" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="8" stroke="url(#neuralGradient)" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="3" fill="url(#neuralGradient)"/>
+                        </svg>
+                        <span class="logo-text">AI.DEV</span>
+                    </div>
+                    <p class="footer-description">Building the future with AI, one project at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#projects">Projects</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="now.html">Now</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://github.com/BilawalDeveloper" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="https://linkedin.com/in/bilawaldeveloper" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://twitter.com/bilawaldeveloper" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI.DEV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
