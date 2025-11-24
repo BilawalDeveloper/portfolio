@@ -68,8 +68,11 @@ class Testimonial extends Model
 
     /**
      * Get the related project if exists.
+     * Note: This uses a manual lookup since project_related stores a slug string
+     * rather than a foreign key ID. Could be converted to a proper relationship
+     * if project_related is changed to project_id in the migration.
      */
-    public function project()
+    public function getRelatedProjectAttribute()
     {
         if (!$this->project_related) {
             return null;

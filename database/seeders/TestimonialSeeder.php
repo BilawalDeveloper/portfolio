@@ -88,7 +88,7 @@ class TestimonialSeeder extends Seeder
                 'role' => 'Lead Developer',
                 'company' => 'InnovateTech',
                 'company_url' => 'https://innovatetech.example.com',
-                'content' => 'Best AI engineer I\'ve worked with. Deep understanding of LangChain, vector embeddings, and production deployment. The code quality is exceptional with proper error handling and monitoring. A pleasure to collaborate with!',
+                'content' => "Best AI engineer I've worked with. Deep understanding of LangChain, vector embeddings, and production deployment. The code quality is exceptional with proper error handling and monitoring. A pleasure to collaborate with!",
                 'avatar_url' => null,
                 'rating' => 5,
                 'project_related' => null,
