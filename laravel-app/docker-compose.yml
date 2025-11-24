@@ -25,9 +25,11 @@ services:
       - DB_PORT=3306
       - DB_DATABASE=laravel
       - DB_USERNAME=laravel
-      - DB_PASSWORD=secret
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
     depends_on:
       - db
+    env_file:
+      - .env.docker
 
   # MySQL Database
   db:
@@ -36,13 +38,11 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
     volumes:
       - dbdata:/var/lib/mysql
-    ports:
-      - "3306:3306"
     networks:
       - laravel-network
 
@@ -57,7 +57,7 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       PMA_USER: laravel
-      PMA_PASSWORD: secret
+      PMA_PASSWORD: ${PMA_PASSWORD:-secret}
     networks:
       - laravel-network
     depends_on:

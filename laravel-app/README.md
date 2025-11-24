@@ -27,10 +27,20 @@ cd portfolio/laravel-app
 
 ### 2. Environment Configuration
 
+#### Laravel Environment
 The `.env` file is already configured for Docker. Key settings:
 - Database connection: MySQL (containerized)
 - App URL: http://localhost:8000
 - Database credentials are set for Docker containers
+
+#### Docker Environment (Security)
+Copy the Docker environment template and customize if needed:
+```bash
+cp .env.docker.example .env.docker
+# Edit .env.docker to set your own passwords (recommended for production)
+```
+
+**Note**: The `.env.docker` file contains sensitive credentials and is excluded from version control.
 
 ### 3. Start Docker Containers
 
@@ -179,6 +189,24 @@ Key environment variables in `.env`:
 - `DB_DATABASE`: Database name
 - `DB_USERNAME`: Database username
 - `DB_PASSWORD`: Database password
+
+## Security Considerations
+
+### Docker Environment Variables
+- Sensitive credentials are managed via `.env.docker` (excluded from version control)
+- Default passwords are provided for development only
+- **Production**: Always use strong, unique passwords in `.env.docker`
+- The docker-compose.yml uses environment variable substitution for security
+
+### Database Access
+- MySQL is accessible only within the Docker network (not exposed to host)
+- phpMyAdmin provides web-based access for development
+- For production: Disable phpMyAdmin and use secure connection methods
+
+### Vite HMR Configuration
+- HMR host can be configured via `VITE_HMR_HOST` environment variable
+- Default: `localhost` for local development
+- Adjust for different Docker network configurations if needed
 
 ## Troubleshooting
 
