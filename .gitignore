@@ -1,0 +1,23 @@
+# Laravel application dependencies
+laravel-app/vendor/
+laravel-app/node_modules/
+laravel-app/.env
+laravel-app/.env.docker
+laravel-app/database/database.sqlite
+
+# Build artifacts
+laravel-app/public/build/
+laravel-app/public/hot/
+laravel-app/storage/*.key
+laravel-app/storage/pail/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
