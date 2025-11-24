@@ -123,7 +123,7 @@
                     <span class="hamburger-line"></span>
                 </button>
             </div>
-            <ul class="nav-links" id="navLinks" role="navigation">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -191,9 +191,9 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section">
+    <section id="about" class="about-section" role="region" aria-labelledby="about-heading">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 id="about-heading" class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-description">
@@ -208,16 +208,16 @@
                         and <strong>AI Agents</strong> to solve complex real-world problems. I stay at the forefront 
                         of AI innovation, constantly exploring and implementing emerging technologies.
                     </p>
-                    <div class="stats-grid">
-                        <div class="stat-card">
+                    <div class="stats-grid" role="list">
+                        <div class="stat-card" role="listitem">
                             <div class="stat-number">50+</div>
                             <div class="stat-label">AI Projects</div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" role="listitem">
                             <div class="stat-number">5+</div>
                             <div class="stat-label">Years Experience</div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" role="listitem">
                             <div class="stat-number">100%</div>
                             <div class="stat-label">Client Satisfaction</div>
                         </div>
@@ -228,9 +228,9 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills-section">
+    <section id="skills" class="skills-section" role="region" aria-labelledby="skills-heading">
         <div class="container">
-            <h2 class="section-title">Technical Expertise</h2>
+            <h2 id="skills-heading" class="section-title">Technical Expertise</h2>
             <p class="section-subtitle">Cutting-edge technologies recruiters are looking for in 2025</p>
             
             <div class="skills-grid">
@@ -248,27 +248,27 @@
                     <ul class="skill-list">
                         <li class="skill-item">
                             <span class="skill-name">Large Language Models (LLMs)</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="95" style="width: 95%"></div></div>
                         </li>
                         <li class="skill-item">
                             <span class="skill-name">GPT-4, Claude, Gemini APIs</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="95" style="width: 95%"></div></div>
                         </li>
                         <li class="skill-item">
                             <span class="skill-name">RAG (Retrieval-Augmented Generation)</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="90" style="width: 90%"></div></div>
                         </li>
                         <li class="skill-item">
                             <span class="skill-name">LangChain & LlamaIndex</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="90" style="width: 90%"></div></div>
                         </li>
                         <li class="skill-item">
                             <span class="skill-name">AI Agents & Multi-Agent Systems</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="85" style="width: 85%"></div></div>
                         </li>
                         <li class="skill-item">
                             <span class="skill-name">Prompt Engineering</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="95" style="width: 95%"></div></div>
                         </li>
                     </ul>
                 </div>
@@ -467,17 +467,17 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects-section">
+    <section id="projects" class="projects-section" role="region" aria-labelledby="projects-heading">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <h2 id="projects-heading" class="section-title">Featured Projects</h2>
             <p class="section-subtitle">AI-powered applications that solve real-world problems</p>
             
-            <div class="projects-grid">
-                <div class="project-card" data-tilt>
-                    <div class="project-glow"></div>
+            <div class="projects-grid" role="list">
+                <div class="project-card" data-tilt role="listitem">
+                    <div class="project-glow" aria-hidden="true"></div>
                     <div class="project-image">
-                        <div class="project-placeholder ai-chat-visual">
-                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                        <div class="project-placeholder ai-chat-visual" aria-hidden="true">
+                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" aria-hidden="true">
                                 <rect x="20" y="30" width="60" height="8" rx="4" fill="currentColor" opacity="0.3"/>
                                 <rect x="20" y="45" width="45" height="8" rx="4" fill="currentColor" opacity="0.3"/>
                                 <rect x="20" y="60" width="50" height="8" rx="4" fill="currentColor" opacity="0.5"/>
@@ -685,9 +685,9 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact-section">
+    <section id="contact" class="contact-section" role="region" aria-labelledby="contact-heading">
         <div class="container">
-            <h2 class="section-title">Let's Build Something Amazing</h2>
+            <h2 id="contact-heading" class="section-title">Let's Build Something Amazing</h2>
             <p class="section-subtitle">Ready to bring AI innovation to your next project</p>
             
             <div class="contact-content">
